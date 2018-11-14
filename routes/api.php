@@ -28,3 +28,12 @@ Route::group([
     Route::post('me', 'AuthController@me');
     Route::post('register', 'AuthController@register');
 });
+
+Route::group([
+    'middleware' => 'api'
+], function ($router) {
+    Route::get('tasks', 'TaskController@index');
+    Route::post('task', 'TaskController@store');
+    Route::put('task/{task}', 'TaskController@update');
+    Route::delete('task/{task}', 'TaskController@delete');
+});
