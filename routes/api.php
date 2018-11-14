@@ -19,15 +19,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::group([
-
     'middleware' => 'api',
     'prefix' => 'auth'
-
 ], function ($router) {
-
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+    Route::post('register', 'AuthController@register');
+});
 
+Route::group([
+    'middleware' => 'api'
+], function ($router) {
+    Route::get('tasks', 'TaskController@index');
+    Route::post('task', 'TaskController@store');
+    Route::put('task/{task}', 'TaskController@update');
+    Route::delete('task/{task}', 'TaskController@delete');
 });
